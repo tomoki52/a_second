@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-twt@_-!p$x(i%j6^mnz09v)h)g-&p$$i^hej$@1!t#7^&f7!h2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = ["*"]
 
@@ -133,6 +133,7 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+DEBUG = False
 try:
     from config.local_settings import *
 except ImportError:
