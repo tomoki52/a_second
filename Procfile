@@ -1,2 +1,2 @@
 
-web: gunicorn a_second.wsgi --log-file -
+web: gunicorn hybridart.wsgi --log-file -
