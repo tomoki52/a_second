@@ -1,0 +1,15 @@
+{% load static %}
+
+<html>
+    <head>
+    <link rel="stylesheet" href="{% static 'css/clock.css'%}">
+    </head>
+    <body>
+        <h1>this is form.</h1>
+        <form action="{% url 'a_second:input' %}" method="POST">
+            {% csrf_token %}
+            {{form}}
+            <button type="submit" class="btn">送信</button>
+        </form>
+    </body>
+</html>
