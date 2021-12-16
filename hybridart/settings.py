@@ -133,7 +133,7 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DEBUG = Falase
+DEBUG = False
 try:
     from .config.local_settings import *
 except ImportError:
