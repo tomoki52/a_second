@@ -25,15 +25,19 @@ body {
 body.light {
     background: #d1dae3;
 }
-
+.clocklist {
+     display: flex;
+     flex-wrap: wrap;   
+      margin: 0 auto;
+}
 
 .clock {
-    width: 375px;
-    height: 375px;
+    width: 200px;
+    height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url(../clock.png);
+    background: url("/static/src/clock.png");
     background-size: cover;
     border: 4px;
     /* box-shadow: 15px 15px 15px rgba(255, 255, 255, 0.5); */
@@ -88,18 +92,18 @@ body.light .clock:before {
 
 /* length of respective arms; */
 .clock .hour, .hr {
-    width: 160px;
-    height: 160px;
+    width: 85px;
+    height: 85px;
 } 
 
 .clock .min, .mn {
-    width: 190px;
-    height: 190px;
+    width: 100px;
+    height: 100px;
 }
 
 .clock .sec, .sc {
-    width: 230px;
-    height: 230px;
+    width: 120px;
+    height: 120px;
 }
 
 
@@ -116,8 +120,8 @@ body.light .clock:before {
 .hr:before {
     content: '';
     position: absolute;
-    width: 7.5px;
-    height: 80px;
+    width: 4px;
+    height: 50%;
     background: #f81460;
     z-index: 10;
     /* z-index least */
@@ -127,8 +131,8 @@ body.light .clock:before {
 .mn:before {
     content: '';
     position: absolute;
-    width: 3.5px;
-    height: 100px;
+    width: 1.8px;
+    height: 50%;
     background: #ffffff;
     z-index: 11;
     /* z-index more than hour hand */
@@ -144,8 +148,8 @@ body.light .mn:before {
 .sc:before {
     content: '';
     position: absolute;
-    width: 2px;
-    height: 150px;
+    width: 1px;
+    height: 50%;
     background: #0075fa80;
     z-index: 12;
     /* z-index more than hour minute hand */

@@ -11,10 +11,10 @@ def clock(request):
 
 def input(request):
     if request.method == "POST":
-        form = ClockForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("a_second:clock")
+        print(request.POST)
+        form = Clock.objects.create(second=float(request.POST["second"]))
+        form.save()
+        return redirect("a_second:clock")
     else:
         form = ClockForm
     return render(request, "a_second/form.html", {"form": form})
