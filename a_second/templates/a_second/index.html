@@ -56,8 +56,12 @@
         
         for (var key in data){
             console.log(data[key])
-            var a_second = data[key]["second"];
+            if(!data[key]["second"]){
+                var a_second = data[key]["second"];
                         // for time;
+            }else{
+                var a_second = 1
+            }
 
             var clock = document.createElement("div");
             clock.classList.add("clock");
