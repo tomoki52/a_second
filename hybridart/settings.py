@@ -134,6 +134,20 @@ STATICFILES_DIRS = (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEBUG = False
+
+DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'dbrl2rqlh7356k',
+            'USER': 'hlmxmeyngclpte',
+            'PASSWORD': '
+9878bbe4730ebf7bfaacec99f0c154402ef750f0f1d24da4c5ea85776390a488',
+            'HOST': '
+ec2-3-228-134-188.compute-1.amazonaws.com',
+            'PORT': '5432',
+            }
+        }
+
 try:
     from .config.local_settings import *
 except ImportError:
