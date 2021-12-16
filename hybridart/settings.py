@@ -82,9 +82,7 @@ DATABASES = {
     }
 }
 '''
-import dj_database_url
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
+
 
 
 # Password validation
@@ -146,6 +144,11 @@ DATABASES = {
             'PORT': '5432',
             }
         }
+
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+
 
 try:
     from .config.local_settings import *
