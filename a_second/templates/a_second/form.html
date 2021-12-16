@@ -28,7 +28,7 @@
             
             </button>
 
-            <button type="button" onclick="post_second()">
+            <button type="button"disabled id="btnPost" onclick="post_second()">
             ok
             
             </button>
@@ -75,6 +75,8 @@
                 gmt = new Date().getTimezoneOffset() / 60;	// 戻り値は分のため60で割る
                 //document.getElementById("time").innerHTML = "00:00:00.00";
                 document.getElementById("btnStart").disabled = "";	
+                document.getElementById("btnPost").disabled = "true";		// クリアボタンを使用可
+                
             }
 
             /*
@@ -101,6 +103,8 @@
                      document.getElementById("btnStart").innerHTML = "start";
                      document.getElementById("btnStart").disabled = "true";	
                      document.getElementById("btnClear").disabled = "";		// クリアボタンを使用可
+                     document.getElementById("btnPost").disabled = "";		// クリアボタンを使用可
+                    
                      drawTime();
              }
          }
