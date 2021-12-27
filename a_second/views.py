@@ -7,7 +7,7 @@ def clock(request):
     clock_query_set = Clock.objects.all()
     clock_list = list(clock_query_set.values())
    
-    return render(request, "a_second/index.html",{"data_json": json.dumps(clock_list)})
+    return render(request, "a_second/index2.html",{"data_json": json.dumps(clock_list)})
 
 def input(request):
     if request.method == "POST":

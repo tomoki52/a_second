@@ -1,0 +1,194 @@
+{% load static %}
+
+<html>
+
+<head>
+    <title>a second</title>
+    <link rel="stylesheet" href="{% static 'css/clock.css'%}">
+
+</head>
+
+<body class="">
+
+
+    <div>
+        <div class="clocklist">
+
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    class ClockHands {
+        constructor(time,tag) {
+            this.time = time;
+            this.deg = 6;
+            this.tag = tag;
+            this.div =  document.createElement("div");
+            // 360 / (12 * 5);
+        }
+        putAhead() {
+            pass;
+        }
+        
+        addClassList(){
+            this.div.classList.add(this.tag);
+        }
+    }
+    class HourClockHands extends ClockHands {
+        constructor(time,tag) {
+            super();
+            this.time = time * this.deg * 5;
+        }
+        putAhead() {
+            this.time += this.deg * 5;
+        }
+    }
+
+    class MinuteClockHands extends ClockHands {
+        constructor(time,tag) {
+            super();
+            this.time = time * this.deg;
+        }
+        putAhead() {
+            this.time += this.deg;
+        }
+    }
+
+
+    class SecondClockHands extends ClockHands {
+        constructor(time,tag) {
+            super();
+            this.time = time * this.deg;
+
+        }
+        putAhead() {
+            this.time = this.time + this.deg;
+        }
+    }
+
+
+    const data = JSON.parse('{{ data_json|safe }}');
+    console.log(data);
+    //const deg = 6;
+    // 360 / (12 * 5);
+    var day = new Date();
+    var clock_list = [];
+    var hh_list = [];
+    var mm_list = [];
+    var ss_list = [];
+    for (var i = 0; i < data.length; i++) {
+        var initial_hh = new HourClockHands(day.getHours(),"hr");
+        var initial_mm = new MinuteClockHands(day.getMinutes(),"mn");
+        var initial_ss = new SecondClockHands(day.getSeconds(),"sc");
+        hh_list.push(initial_hh);
+        mm_list.push(initial_mm);
+        ss_list.push(initial_ss);
+    }
+
+    var hr_list = [];
+    var mn_list = [];
+    var sc_list = [];
+    var audioElem_list = [];
+    var audioElem1 = new Audio();
+    var audioElem2 = new Audio();
+    var audioElem3 = new Audio();
+    var audioElem4 = new Audio();
+    audioElem1.src = "{% static 'src/clock.mp3' %}";
+    audioElem2.src = "{% static 'src/clock2.mp3' %}";
+    audioElem3.src = "{% static 'src/clock3.mp3' %}";
+    audioElem4.src = "{% static 'src/clock4.mp3' %}";
+    var audioElements = [];
+    audioElements.push(audioElem1);
+    audioElements.push(audioElem2);
+    audioElements.push(audioElem3);
+    audioElements.push(audioElem4);
+
+    for (var key in data) {
+        console.log(data[key])
+        var num = key;
+        var a_second = data[num]["second"];
+
+
+        var clock = document.createElement("div");
+        clock.classList.add("clock");
+
+        var hr = document.createElement("div");
+        hr.classList.add("hr");
+
+        var mn = document.createElement("div");
+        mn.classList.add("mn");
+
+        var sc = document.createElement("div");
+        sc.classList.add("sc");
+
+
+        hr_list.push(hr);
+        mn_list.push(mn);
+        sc_list.push(sc);
+
+        audioElem_list.push(audioElements[Math.floor(Math.random() * 4)]);
+
+
+
+        var a = setInterval(move_clock, a_second * 1000, num);
+        console.log("timer_id", a);
+        clock.appendChild(hr);
+        clock.appendChild(mn);
+        clock.appendChild(sc);
+
+        var clocklist = document.querySelector(".clocklist");
+        clocklist.appendChild(clock);
+
+
+        function toggleClass() {
+            const body = document.querySelector('body');
+            body.classList.toggle('light');
+            body.style.transition = `0.3s linear`;
+        }
+    }
+
+
+    function move_clock(num) {
+        var _hh = new HourClockHands();
+        _hh = hh_list[num];
+
+        var _mm = new MinuteClockHands();
+        _mm = mm_list[num];
+
+        var _ss = new SecondClockHands();
+        _ss = ss_list[num];
+
+        hr = hr_list[num];
+        mn = mn_list[num];
+        sc = sc_list[num];
+        console.log("num:" + num);
+        console.log("ss_list[num].time" + ss_list[num].time);
+        console.log("ss_list[num].deg" + ss_list[num].deg);
+        _ss.putAhead();
+        audioElem_list[num].play();
+        //console.log("ss:" + ss.time);
+        if (_ss.time % 360 == 0) {
+            console.log("minute");
+            _mm.putAhead()
+
+            if (_mm.time % 360 == 0) {
+                _hh.putAhead()
+            }
+        }
+
+        hr.style.transform = `rotateZ(${_hh.time}deg)`;
+        mn.style.transform = `rotateZ(${_mm.time}deg)`;
+        sc.style.transform = `rotateZ(${_ss.time}deg)`;
+
+        hh_list[num] = _hh;
+        mm_list[num] = _mm;
+        ss_list[num] = _ss;
+        hr_list[num] = hr;
+        mn_list[num] = mn;
+        sc_list[num] = sc;
+    }
+</script>
+</body>
+
+</html>
